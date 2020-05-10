@@ -3,6 +3,7 @@ package cn.lger.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
 /**
@@ -11,6 +12,7 @@ import java.time.LocalDate;
  * Created by Pro on 2017-12-06.
  */
 @Entity
+@Table(name="`Member`")
 public class Member {
 
     @Id
