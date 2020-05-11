@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:fragment="ment">
-    <nav class="navbar navbar-default top-navbar" role="navigation" >
+    <nav class="navbar navbar-default top-navbar" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle waves-effect waves-dark" data-toggle="collapse"
                     data-target=".sidebar-collapse">
@@ -24,7 +24,8 @@
         <!--用户登录信息-->
         <ul class="nav navbar-top-links navbar-right">
             <li><a class="dropdown-button waves-effect waves-dark" href="#" data-activates="dropdown1"><i
-                    class="fa fa-user fa-fw"></i> <b th:unless="${session.admin == null}" th:text="${session.admin.username}"></b> <i
+                    class="fa fa-user fa-fw"></i> <b th:unless="${session.admin == null}"
+                                                     th:text="${session.admin.username}"></b> <i
                     class="material-icons right">arrow_drop_down</i></a></li>
         </ul>
     </nav>
@@ -46,7 +47,7 @@
                 </li>
                 <!--会员管理栏-->
                 <li>
-                    <a href="javascript:void(0)" class="waves-effect waves-dark"><i class="fa fa-user"></i>会员管理<span
+                    <a href="javascript:void(0)" class="waves-effect waves-dark"><i class="fa fa-user"></i>服务管理<span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -77,6 +78,25 @@
 
                         <li>
                             <a th:href="@{/deleteMember}">会员注销</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)" class="waves-effect waves-dark"><i class="fa fa-user"></i>会员管理<span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a>服务项目</a>
+                        </li>
+                        <li>
+                            <a>服务反馈</a>
+                        </li>
+                        <li>
+                            <a>服务订单 </a>
+                        </li>
+                        <li>
+                            <a>反馈记录</a>
                         </li>
                     </ul>
                 </li>
