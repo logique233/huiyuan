@@ -47,7 +47,7 @@
                 </li>
                 <!--会员管理栏-->
                 <li>
-                    <a href="javascript:void(0)" class="waves-effect waves-dark"><i class="fa fa-user"></i>服务管理<span
+                    <a href="javascript:void(0)" class="waves-effect waves-dark"><i class="fa fa-user"></i>会员管理<span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -83,7 +83,7 @@
                 </li>
 
                 <li>
-                    <a href="javascript:void(0)" class="waves-effect waves-dark"><i class="fa fa-user"></i>会员管理<span
+                    <a href="javascript:void(0)" class="waves-effect waves-dark"><i class="fa fa-user"></i>服务管理<span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -100,47 +100,49 @@
                         </li>
                     </ul>
                 </li>
-                <!--礼品栏-->
+                <!--消费管理-->
                 <li>
-                    <a href="javascript:void(0)" class="waves-effect waves-dark"><i class="fa fa-gift"></i>礼品消费<span
+                    <a href="javascript:void(0)" class="waves-effect waves-dark"><i class="fa fa-gift"></i>消费管理<span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a th:href="@{/setGift}">礼品设置</a>
-                        </li>
+                            <a href="#">礼品消费<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a th:href="@{/setGift}">礼品设置</a>
+                                </li>
 
-                        <li>
-                            <a th:href="@{/modifyGiftNumber}">数量修改</a>
-                        </li>
+                                <li>
+                                    <a th:href="@{/modifyGiftNumber}">数量修改</a>
+                                </li>
 
+                                <li>
+                                    <a th:href="@{/exchangeRecord}">兑换记录</a>
+                                </li>
+                            </ul>
+                        </li>
                         <li>
-                            <a th:href="@{/exchangeRecord}">兑换记录</a>
+                            <a href="#">商品消费<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a th:href="@{/addCommodity}">添加商品</a>
+                                </li>
+
+                                <li>
+                                    <a th:href="@{/modifyCommodity}">商品修改</a>
+                                </li>
+
+                                <li>
+                                    <a th:href="@{/purchaseCommodity}">商品购买</a>
+                                </li>
+
+                                <li>
+                                    <a th:href="@{/transactionRecord}">购买记录</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
-                <!--商品消费-->
-                <li>
-                    <a href="javascript:void(0)" class="waves-effect waves-dark"><i class="fa fa-yen"></i>商品消费<span
-                            class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a th:href="@{/addCommodity}">添加商品</a>
-                        </li>
-
-                        <li>
-                            <a th:href="@{/modifyCommodity}">商品修改</a>
-                        </li>
-
-                        <li>
-                            <a th:href="@{/purchaseCommodity}">商品购买</a>
-                        </li>
-
-                        <li>
-                            <a th:href="@{/transactionRecord}">购买记录</a>
-                        </li>
-                    </ul>
-                </li>
-
 
             </ul>
 
