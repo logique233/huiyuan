@@ -20,12 +20,13 @@
         <div class="card" style="border-radius: 10px">
             <div class="card-block">
                 <!--标题-->
-                <h2 class="card-title"><i class="fa fa-user" aria-hidden="true"></i>管理员登录</h2>
+                <h2 class="card-title"><i class="fa fa-user" aria-hidden="true"></i>服务人员登录</h2>
                 <span class="text-muted text-danger" th:unless="${error == null}" th:text="${error}"></span>
                 <hr>
                 <form th:action="@{/login}" method="post">
                     <!--用户输入框-->
                     <div class="input-group ">
+
                         <input type="text" class="form-control" placeholder="管理员" id="username" name="username" th:value="${username}" required>
                     </div>
                     <br/>
