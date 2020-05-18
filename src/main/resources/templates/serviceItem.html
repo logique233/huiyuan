@@ -38,7 +38,7 @@
         <!--内容主题-->
         <div class="header">
             <h1 class="page-header">
-                个人信息
+                服务项目
             </h1>
         </div>
         <div id="page-inner">
@@ -137,7 +137,38 @@
             title: '会员状态'
         }
     ];
-    var data = [];
+    var data = [ {
+        "id": "0",
+        "iconPath": "/assets/icon/01.jpg",
+        "memberName": "123333",
+        "password": "0",
+        "phone": "0",
+        "birthday": "",
+        "sex": " ",
+        "memberGrade": {
+            "id": 1,
+            "gradeName": "普通会员",
+            "discount": 9.8,
+            "comment": "普通会员"
+        },
+        "memberIntegral": 0,
+        "balance": 0.0,
+        "state": " ",
+        "email": " ",
+        "localDate": " "
+    }];
+
+    $('#table').bootstrapTable({
+
+        data: data,
+        columns: columns,
+        cardView: true,
+        onClickRow:function(row, $element, field)
+        {
+            alert("选择了"+row.memberName);
+            id = parseInt(row.id);
+        }
+    });
 
     var id = 00;
     //bootstrap table初始化数据
@@ -152,18 +183,8 @@
             data: { currentPage:0,memberName: memberName },
             success: function (data) {
                 var newData = data.content;
+                $('#table').bootstrapTable('load', newData);
 
-                $('#table').bootstrapTable({
-
-                    data: newData,
-                    columns: columns,
-                    cardView: true,
-                    onClickRow:function(row, $element, field)
-                    {
-                        alert("选择了"+row.memberName);
-                        id = parseInt(row.id);
-                    }
-                });
             }
         });
         // $('#table').bootstrapTable('load', newData);

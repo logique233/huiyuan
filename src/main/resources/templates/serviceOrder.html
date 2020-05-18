@@ -34,14 +34,14 @@
         <!--内容主题-->
         <div class="header">
             <h1 class="page-header">
-                个人信息
+                服务订单
             </h1>
         </div>
         <div id="page-inner">
             <div class="card">
                 <div class="card-content">
                     <div id="toolbar">
-                        <div id="dataTables-example_filter" class="dataTables_filter"><label>搜索会员名:
+                        <div id="dataTables-example_filter" class="dataTables_filter"><label>搜索会员账号:
                             <input onkeydown="if(event.keyCode===13) loadData();" id="search" type="search"
                                    class="form-control input-sm" aria-controls="dataTables-example"></label></div>
                     </div>
@@ -99,6 +99,24 @@
         }
     ];
 
+    var data = [ {
+        "id": "0",
+        "memberID":"",
+        "serviceItem":"",
+        "createtime":""
+    }];
+
+    $('#table').bootstrapTable({
+
+        data: data,
+        columns: columns,
+        cardView: true,
+        onClickRow:function(row, $element, field)
+        {
+            alert("选择了"+row.memberName);
+
+        }
+    });
 
 
 
@@ -111,13 +129,8 @@
             data: {id: memberName},
             success: function (data) {
                 var newData = data;
+                $('#table').bootstrapTable('load', newData);
 
-                $('#table').bootstrapTable({
-
-                    data: newData,
-                    columns: columns
-
-                });
             }
         });
         // $('#table').bootstrapTable('load', newData);

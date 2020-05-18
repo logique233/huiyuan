@@ -10,7 +10,7 @@ public interface ServiceItemDao extends JpaRepository<ServiceItem, String> {
     List<ServiceItem> findById(Integer id);
 
 
-    List<ServiceItem> findByMemberID(String id);
+    List<ServiceItem> findByMemberIDLike(String id);
 
 
 }
