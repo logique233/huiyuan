@@ -28,14 +28,11 @@ public class MembershipApplicationTests {
 
 	@Test
 	public void contextLoads() {
-
-		for (int i = 0; i < 10; i++) {
-			ServiceAsscess serviceAsscess = new ServiceAsscess();
-			serviceAsscess.setCreatetime(new Date());
-			serviceAsscess.setServiceAsscess("asdkljjjjjjj");
-			serviceAsscess.setServiceLevel("8");
-			serviceAsscessDao.save(serviceAsscess);
-		}
+        ServiceItem serviceItem = new ServiceItem();
+        serviceItem.setId(123);
+        serviceItem.setCreatetime(new Date());
+        serviceItem.setServiceItem("usahdi");
+        serviceItemDao.save(serviceItem);
 	}
 
 
