@@ -15,10 +15,20 @@ public class ServiceItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    private Integer memberID;
+
     private String serviceItem;
 
     @CreationTimestamp
     private Date createtime;
+
+    public Integer getMemberID() {
+        return memberID;
+    }
+
+    public void setMemberID(Integer memberID) {
+        this.memberID = memberID;
+    }
 
     public Integer getId() {
         return id;

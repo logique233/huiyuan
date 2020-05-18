@@ -17,7 +17,7 @@ public class ServiceItemService {
     }
 
     public List<ServiceItem> findbyid(int id) {
-        return serviceItemDao.findById(id);
+        return serviceItemDao.findByMemberID(id);
     }
 
 }

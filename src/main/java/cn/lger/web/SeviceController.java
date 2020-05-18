@@ -4,6 +4,8 @@ import cn.lger.dao.ServiceAsscessDao;
 import cn.lger.dao.ServiceItemDao;
 import cn.lger.domain.ServiceAsscess;
 import cn.lger.domain.ServiceItem;
+import cn.lger.service.ServiceAsscessService;
+import cn.lger.service.ServiceItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,10 +25,10 @@ import java.util.List;
 public class SeviceController {
 
     @Autowired
-    ServiceItemDao serviceItemDao;
+    ServiceItemService serviceItemService;
 
     @Autowired
-    ServiceAsscessDao serviceAsscessDao;
+    ServiceAsscessService serviceAsscessService;
 
     @GetMapping("/serviceItem")
     public String getServiceItem() {
@@ -57,10 +59,10 @@ public class SeviceController {
             for (String item :
                     list) {
                 ServiceItem serviceItem = new ServiceItem();
-                serviceItem.setId(id);
+                serviceItem.setMemberID(id);
                 serviceItem.setServiceItem(item);
                 serviceItem.setCreatetime(new Date());
-                serviceItemDao.save(serviceItem);
+                serviceItemService.save(serviceItem);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +79,7 @@ public class SeviceController {
         List<ServiceItem> result = new ArrayList<>();
 
         try {
-            result = serviceItemDao.findById(id);
+            result = serviceItemService.findbyid(id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,7 +96,7 @@ public class SeviceController {
             serviceAsscess.setServiceLevel(level);
             serviceAsscess.setServiceAsscess(asscess);
             serviceAsscess.setCreatetime(new Date());
-            serviceAsscessDao.save(serviceAsscess);
+            serviceAsscessService.save(serviceAsscess);
         } catch (Exception e) {
             e.printStackTrace();
             return "shibai";
@@ -110,7 +112,7 @@ public class SeviceController {
         HashMap<String, Object> result = new HashMap<>();
         try {
             Pageable pageable = PageRequest.of(offset-1,limit);
-            Page<ServiceAsscess> serviceAsscess = serviceAsscessDao.findAll(pageable);
+            Page<ServiceAsscess> serviceAsscess = serviceAsscessService.getAll(pageable);
             int count = (int) serviceAsscess.getTotalElements();
             List<ServiceAsscess> list = serviceAsscess.getContent();
             result.put("total", count);
