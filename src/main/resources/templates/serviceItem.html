@@ -15,6 +15,10 @@
     <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet"/>
     <!-- Custom Styles-->
     <link href="assets/css/custom-styles.css" rel="stylesheet"/>
+
+    <script src="http://www.itxst.com/package/jquery-3.3.1/jquery.js"></script>
+<!--    <link href="http://www.itxst.com/package/bootstrap-4.3.1/css/bootstrap.css" rel="stylesheet" />-->
+
     <!--&lt;!&ndash; Google Fonts&ndash;&gt;-->
     <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>-->
     <!--<link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">-->
@@ -40,7 +44,38 @@
         <div id="page-inner">
             <div class="card">
                 <div class="card-content">
+                    <div id="toolbar">
+                        <div id="dataTables-example_filter" class="dataTables_filter"><label>搜索会员名:
+                            <input onkeydown="if(event.keyCode===13) loadData();" id="search" type="search"
+                                   class="form-control input-sm" aria-controls="dataTables-example"></label></div>
+                    </div>
 
+                    <div class="table-demo">
+                        <table id="table" class="table table-striped table-bordered table-hover dataTable no-footer"></table>
+
+                        <div class="card">
+                            <div class="checkbox checkbox-success checkbox-inline">
+                                <input type="checkbox" class="styled" id="1" name="name" value="接机服务">
+                                <label for="1"> 接机服务 </label>
+                                <input type="checkbox" class="styled" id="2" name="name" value="升舱服务">
+                                <label for="2"> 升舱服务 </label>
+                                <input type="checkbox" class="styled" id="3" name="name" value="退订机票">
+                                <label for="3"> 退订机票 </label>
+                                <input type="checkbox" class="styled" id="4" name="name" value="送机服务">
+                                <label for="4"> 送机服务 </label>
+                                <input type="checkbox" class="styled" id="5" name="name" value="休息服务">
+                                <label for="5"> 休息服务 </label>
+                                <input type="checkbox" class="styled" id="6" name="name" value="机票预订">
+                                <label for="6"> 机票预订 </label>
+                                <input type="checkbox" class="styled" id="7" name="name" value="转机服务">
+                                <label for="7"> 转机服务 </label>
+                                <input type="checkbox" class="styled" id="8" name="name" value="值机服务">
+                                <label for="8"> 值机服务 </label>
+                                <button type="submit" class="btn btn-success" id="but" onclick="butService()">提交</button>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,136 +100,96 @@
 
 <script src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
 
+<link href="http://www.itxst.com/package/bootstrap-table-1.15.3/bootstrap-table.css" rel="stylesheet" />
+<script src="http://www.itxst.com/package/bootstrap-table-1.15.3/bootstrap-table.js"></script>
 <!-- Custom Js -->
 <script src="assets/js/custom-scripts.js"></script>
 
 <script>
-    var totalPages = 1;
+    //设置需要显示的列
+    var columns = [
+        {
+            field: "id",
+            title: 'ID'
+        }, {
+            field: 'memberName',
+            title: '用户名'
+        }, {
+            field: 'phone',
+            title: '电话'
+        }, {
+            field: 'birthday',
+            title: '生日'
+        }, {
+            field: 'sex',
+            title: '性别'
+        }, {
+            field: 'memberGrade.gradeName',
+            title: '会员等级'
+        }, {
+            field: 'memberIntegral',
+            title: '会员积分'
+        }, {
+            field: 'balance',
+            title: '会员余额'
+        }, {
+            field: 'state',
+            title: '会员状态'
+        }
+    ];
+    var data = [];
 
-    function updateData(pageNum) {
-        if (pageNum < 1 || pageNum > totalPages)
-            return;
+    var id = 00;
+    //bootstrap table初始化数据
+
+
+    function loadData() {
+        var memberName = document.getElementById('search').value;
         $.ajax({
-            url: '/memberGrade',
+            url: '/queryMember',
             dataType: 'JSON',
-            type: 'POST',
-            data: {currentPage: pageNum - 1},
+            type: 'post',
+            data: { currentPage:0,memberName: memberName },
             success: function (data) {
-                console.log(data);
-                totalPages = data.totalPages;
-                var flag = 0;
-                var tableContent = $('#tableContent');
-                tableContent.html('');
-                $.each(data.content, function (index, content) {
-                    console.log(content);
-                    if (flag % 2 === 1)
-                        tableContent.html(tableContent.html() + fillTableHtml('gradeU odd', content));
-                    else
-                        tableContent.html(tableContent.html() + fillTableHtml('gradeU even', content));
+                var newData = data.content;
 
-                    function fillTableHtml(clazz, content) {
-                        return '<tr class="' + clazz + '">' +
-                            '<td style="display:none">' + content.id + '</td>' +
-                            '<td>' + content.gradeName + '</td>' +
-                            '<td>' + content.discount + '</td>' +
-                            '<td>' + content.comment + '</td>' +
-                            '<td><button class="waves-effect waves-light btn" data-toggle="modal" data-target="#myModal" onclick="openModelWindow(this)">修改</button></td>' +
-                            '</tr>';
+                $('#table').bootstrapTable({
+
+                    data: newData,
+                    columns: columns,
+                    cardView: true,
+                    onClickRow:function(row, $element, field)
+                    {
+                        alert("选择了"+row.memberName);
+                        id = parseInt(row.id);
                     }
                 });
+            }
+        });
+        // $('#table').bootstrapTable('load', newData);
+    }
 
-                //totalPages
-                if (data.number + 1 >= totalPages - 1)
-                    var inHTML = '<li class="page-item"><a class="page-link" onclick="updateData(' + (totalPages - 1) + ')" href="javascript:void(0)">上一页</a></li>';
-                if (data.number <= 0)
-                    inHTML = '<li class="page-item"><a class="page-link" onclick="updateData(' + 1 + ')" href="javascript:void(0)">上一页</a></li>';
-                else
-                    inHTML = '<li class="page-item"><a class="page-link" onclick="updateData(' + data.number + ')" href="javascript:void(0)">上一页</a></li>';
 
-                for (var i = data.number - 1; i <= data.number + 3; i++) {
-                    if (i < 1)
-                        continue;
-                    if (i > data.totalPages)
-                        break;
-                    if (data.number + 1 === i)
-                        inHTML += '<li class="active page-item"><a class="page-link" onclick="updateData(' + i + ')" href="javascript:void(0)">' + i + '</a></li>';
-                    else
-                        inHTML += '<li class="page-item"><a class="page-link" onclick="updateData(' + i + ')" href="javascript:void(0)">' + i + '</a></li>';
+    function butService() {
+        var chk_value = [];
+        $('input[name="name"]:checked').each(function () {
+            console.log($(this).val());
+            chk_value.push($(this).val());
+        });
+        if (chk_value.length == 0) {
+            alert('你还没有选择任何内容！');
+        } else {
+            $.ajax({
+                url: '/saveitem',
+                dataType: 'JSON',
+                type: 'post',
+                data: { 'id': id, 'list': chk_value },
+                success: function (data) {
+                    alert('成功');
                 }
-                if (data.number + 1 >= totalPages)
-                    inHTML += '<li class="page-item"><a class="page-link" onclick="updateData(' + totalPages + ')" href="javascript:void(0)">下一页</a></li>';
-                else
-                    inHTML += '<li class="page-item"><a class="page-link" onclick="updateData(' + (data.number + 2) + ')" href="javascript:void(0)">下一页</a></li>';
-                $('#page').html(inHTML);
-
-            }
-        })
-    }
-
-    updateData(1);
-
-    var info;
-    function openModelWindow(btn) {
-        info = $(btn).parent().parent();
-//        console.log(info);
-//        console.log(info.children()[1]);
-//        console.log(info.children()[2]);
-//        console.log(info.children()[3]);
-        $('#gradeId').val($(info.children()[0]).text());
-        $('#gradeName').val($(info.children()[1]).text());
-        $('#discount').val($(info.children()[2]).text());
-        $('#comment').val($(info.children()[3]).text());
-        $('#myModal').modal('show');
-    }
-
-    function updateMemberGrade() {
-        var id = $('#gradeId').val();
-        var gradeName = $('#gradeName').val();
-        var discount = $('#discount').val();
-        var comment = $('#comment').val();
-        $.ajax({
-            url: '/updateMemberGrade',
-            type: 'POST',
-            data: {id: id, gradeName: gradeName, discount: discount, comment: comment},
-            success: function (data) {
-                var modal = $('#myModal');
-                modal.attr('class', 'modal fade');
-                modal.attr('aria-hidden','true');
-                modal.attr('style','display:none');
-                $('.modal-backdrop')[0].remove();
-                $('body').attr('class', '').attr('style', '');
-                if (data === 'success') {
-                    $(info.children()[1]).text(gradeName);
-                    $(info.children()[2]).text(discount);
-                    $(info.children()[3]).text(comment);
-                }
-                alert(data);
-            }
-        })
-    }
-
-    function addMemberGrade() {
-        var gradeName = $('#addGradeName').val();
-        var discount = $('#addDiscount').val();
-        var comment = $('#addComment').val();
-
-        $.ajax({
-            url:'/addMemberGrade',
-            type:'POST',
-            data:{gradeName: gradeName, discount: discount, comment: comment},
-            success:function (data) {
-                var tableContent = $('#tableContent');
-                var addHTML = '<tr class="gradeU odd">' +
-                    '<td style="display:none">' + data.id + '</td>' +
-                    '<td>' + data.gradeName + '</td>' +
-                    '<td>' + data.discount + '</td>' +
-                    '<td>' + data.comment + '</td>' +
-                    '<td><button class="waves-effect waves-light btn" onclick="openModelWindow(this)">修改</button></td>' +
-                    '</tr>';
-                tableContent.html(tableContent.html() + addHTML);
-            }
-        })
-
+            });
+        }
+        console.log(chk_value);
     }
 
 </script>

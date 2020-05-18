@@ -29,7 +29,7 @@ public class MembershipApplicationTests {
 	@Test
 	public void contextLoads() {
         ServiceItem serviceItem = new ServiceItem();
-        serviceItem.setId(123);
+        serviceItem.setMemberID("2222222222222");
         serviceItem.setCreatetime(new Date());
         serviceItem.setServiceItem("usahdi");
         serviceItemDao.save(serviceItem);

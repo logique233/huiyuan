@@ -1,6 +1,7 @@
 package cn.lger.domain;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,18 +16,19 @@ public class ServiceItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private Integer memberID;
+    private String memberID;
 
     private String serviceItem;
 
     @CreationTimestamp
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
     private Date createtime;
 
-    public Integer getMemberID() {
+    public String getMemberID() {
         return memberID;
     }
 
-    public void setMemberID(Integer memberID) {
+    public void setMemberID(String memberID) {
         this.memberID = memberID;
     }
 

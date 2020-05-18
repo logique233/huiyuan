@@ -11,10 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +51,8 @@ public class SeviceController {
     @RequestMapping("/saveitem")
     @PutMapping
     @ResponseBody
-    public String saveItem(int id, List<String> list) {
+    public String saveItem(String id, @RequestParam(value = "list[]") String[] list) {
+
         try {
             for (String item :
                     list) {

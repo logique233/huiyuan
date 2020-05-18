@@ -1,6 +1,7 @@
 package cn.lger.domain;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +22,7 @@ public class ServiceAsscess {
     private String serviceAsscess;
 
     @CreationTimestamp
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
     private Date createtime;
 
     public Integer getId() {
