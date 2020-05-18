@@ -16,7 +16,7 @@ public class ServiceItemService {
         serviceItemDao.save(serviceItem);
     }
 
-    public List<ServiceItem> findbyid(int id) {
+    public List<ServiceItem> findbyid(String id) {
         return serviceItemDao.findByMemberID(id);
     }
 

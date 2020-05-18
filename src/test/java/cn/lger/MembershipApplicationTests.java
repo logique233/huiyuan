@@ -38,7 +38,7 @@ public class MembershipApplicationTests {
 
 	@Test
 	public void page() {
-		Pageable pageable = PageRequest.of(0,5);
+		Pageable pageable = PageRequest.of(0,0);
 		Page<ServiceAsscess> serviceAsscess = serviceAsscessDao.findAll(pageable);
 		List<ServiceAsscess> servicelist = serviceAsscess.getContent();
 		for (ServiceAsscess li :

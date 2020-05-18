@@ -73,7 +73,7 @@ public class SeviceController {
     @RequestMapping("/queryItem")
     @PutMapping
     @ResponseBody
-    public List<ServiceItem> queryItem(int id) {
+    public List<ServiceItem> queryItem(String id) {
         List<ServiceItem> result = new ArrayList<>();
 
         try {
@@ -104,11 +104,13 @@ public class SeviceController {
 
 
     @RequestMapping("/pageAsscess")
-    @PutMapping
+    @GetMapping
     @ResponseBody
     public HashMap<String, Object> queryAsscess(String order,int offset,int limit,String search) {
         HashMap<String, Object> result = new HashMap<>();
         try {
+            if (offset==0)
+                offset = 1;
             Pageable pageable = PageRequest.of(offset-1,limit);
             Page<ServiceAsscess> serviceAsscess = serviceAsscessService.getAll(pageable);
             int count = (int) serviceAsscess.getTotalElements();

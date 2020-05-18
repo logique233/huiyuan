@@ -15,6 +15,10 @@
     <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet"/>
     <!-- Custom Styles-->
     <link href="assets/css/custom-styles.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="201508261557/Font-Awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="201508261557/css/build.css" />
+
     <!--&lt;!&ndash; Google Fonts&ndash;&gt;-->
     <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>-->
     <!--<link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">-->
@@ -42,7 +46,46 @@
             <div class="card">
                 <div class="card-content">
 
-                </div>
+                        <div>
+                            <div class="radio radio-info radio-inline">
+                                <input type="radio" id="1" value="1" name="radioInline">
+                                <label for="1"> 1 </label>
+                            </div>
+                            <div class="radio radio-info radio-inline">
+                                <input type="radio" id="2" value="2" name="radioInline">
+                                <label for="2"> 2 </label>
+                            </div>
+                            <div class="radio radio-info radio-inline">
+                                <input type="radio" id="3" value="3" name="radioInline">
+                                <label for="3"> 3 </label>
+                            </div>
+                            <div class="radio radio-info radio-inline">
+                                <input type="radio" id="4" value="4" name="radioInline">
+                                <label for="4"> 4 </label>
+                            </div>
+                            <div class="radio radio-info radio-inline">
+                                <input type="radio" id="5" value="5" name="radioInline">
+                                <label for="5"> 5 </label>
+                            </div>
+                            <div class="radio radio-info radio-inline">
+                                <input type="radio" id="6" value="6" name="radioInline">
+                                <label for="6"> 6 </label>
+                            </div>
+                            <div class="radio radio-info radio-inline">
+                                <input type="radio" id="7" value="7" name="radioInline">
+                                <label for="7"> 7 </label>
+                            </div>
+                            <div class="radio radio-info radio-inline">
+                                <input type="radio" id="8" value="8" name="radioInline">
+                                <label for="8"> 8 </label>
+                            </div>
+                        </div>
+                        <textarea class="form-control" id="deblock_udid" name="deblock_udid" rows="5"
+                                  style="max-width: 80%"></textarea>
+
+                        <button type="submit" class="btn btn-success" id="but" onclick="butService()">提交</button>
+                    </div>
+
             </div>
         </div>
     </div>
@@ -69,6 +112,21 @@
 <!-- Custom Js -->
 <script src="assets/js/custom-scripts.js"></script>
 
+<script>
+    function butService() {
+        var radio = $("input[name='radioInline']:checked").val();
+        var deblock_udid = $("#deblock_udid").val();
+        $.ajax({
+            url: '/saveAsscess',
+            dataType: 'JSON',
+            type: 'post',
+            data: { level: radio, asscess: deblock_udid },
+            success: function (data) {
+                alert('成功');
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
