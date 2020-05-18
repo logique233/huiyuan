@@ -2,6 +2,7 @@ package cn.lger.security;
 
 import cn.lger.domain.AdminRole;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,8 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomerUserDetailsService userDetailsService;
     @Resource
     private CustomerLoginSuccessHandler successHandler;
-    @Resource
-    private BCryptPasswordEncoder encoder;
+//    @Resource
+//    private BCryptPasswordEncoder encoder;
 
     @Bean
     public BCryptPasswordEncoder encoder() {
@@ -41,8 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService) //注册自己定制的UserDetailsService
-                .passwordEncoder(encoder); // 配置密码加密器
+        auth.userDetailsService(userDetailsService); //注册自己定制的UserDetailsService
+//                .passwordEncoder(encoder); // 配置密码加密器
     }
 
     @Override

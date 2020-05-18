@@ -35,8 +35,8 @@ public class MemberController {
     private MemberService memberService;
     @Resource
     private MemberGradeService memberGradeService;
-    @Resource
-    private BCryptPasswordEncoder encoder;
+//    @Resource
+//    private BCryptPasswordEncoder encoder;
 
 
     @GetMapping("/addMember")
@@ -69,7 +69,7 @@ public class MemberController {
         member.setState("正常");
         member.setBalance((float) 0);
         member.setMemberIntegral(0L);
-        member.setPassword(encoder.encode(member.getPassword()));
+        member.setPassword(member.getPassword());
 //        System.out.println(member);
         member = memberService.addMember(member);
 
