@@ -14,4 +14,6 @@ public interface CommodityDao extends JpaRepository<Commodity, String>{
 
     Commodity findCommodityById(String id);
 
+    Commodity findCommodityByCommodityName(String id);
+
 }

@@ -1,7 +1,9 @@
 package cn.lger;
 
+import cn.lger.dao.CommodityDao;
 import cn.lger.dao.ServiceAsscessDao;
 import cn.lger.dao.ServiceItemDao;
+import cn.lger.domain.Commodity;
 import cn.lger.domain.ServiceAsscess;
 import cn.lger.domain.ServiceItem;
 import org.junit.Test;
@@ -21,31 +23,12 @@ import java.util.List;
 public class MembershipApplicationTests {
 
 	@Autowired
-	ServiceItemDao serviceItemDao;
-
-	@Autowired
-	ServiceAsscessDao serviceAsscessDao;
+	CommodityDao commodityDao;
 
 	@Test
-	public void contextLoads() {
-        ServiceItem serviceItem = new ServiceItem();
-        serviceItem.setMemberID("2222222222222");
-        serviceItem.setCreatetime(new Date());
-        serviceItem.setServiceItem("usahdi");
-        serviceItemDao.save(serviceItem);
-	}
-
-
-	@Test
-	public void page() {
-		Pageable pageable = PageRequest.of(0,0);
-		Page<ServiceAsscess> serviceAsscess = serviceAsscessDao.findAll(pageable);
-		List<ServiceAsscess> servicelist = serviceAsscess.getContent();
-		for (ServiceAsscess li :
-				servicelist) {
-			System.out.println(li);
-
-		}
+	public void test() {
+		Commodity ddd = commodityDao.findCommodityByCommodityName("英国蛋糕");
+		System.out.println("ddd = " + ddd);
 	}
 
 }

@@ -27,4 +27,6 @@ public interface MemberDao extends JpaRepository<Member, String> {
     int queryAllCount();
 
     List<Member> findByBirthday(LocalDate birthday);
+
+
 }

@@ -41,8 +41,8 @@
                     <div class="card-content">
                         <div class="row">
                             <div class="input-field col s6">
-                                <input placeholder="商品号码" id="commodityId" type="text" class="validate" name="commodityId" required/>
-                                <label for="commodityId">商品号码</label>
+                                <input placeholder="商品名称" id="commodityId" type="text" class="validate" name="commodityId" required/>
+                                <label for="commodityId">商品名称</label>
                             </div>
                             <div class="input-field col s6">
                                     <input id="memberId" onblur="confirmMemberId()" name="memberId" type="text" class="validate" placeholder="会员号码" required/>
@@ -98,16 +98,9 @@
 <script>
     
     function confirmMemberId() {
-        var reg = /^\d+$/;
+
         var obj1= document.getElementById('memberId');
-        if (!reg.test(obj1.value)){
-            if (obj1.value === ''){
-                return false;
-            }
-            obj1.setAttribute('class', 'validate invalid');
-            alert('输入会员号码不符合要求');
-            return false;
-        }
+
         return true;
     }
     
