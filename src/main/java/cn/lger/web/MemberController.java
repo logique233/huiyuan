@@ -127,7 +127,7 @@ public class MemberController {
 
     @GetMapping("/balanceRecharge")
     public String getBalanceRechargeView() {
-        return "/balanceRecharge";
+        return "balanceRecharge";
     }
 
     @PostMapping("/balanceRecharge")
