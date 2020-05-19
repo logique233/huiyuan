@@ -5,6 +5,7 @@ import cn.lger.exception.BalanceNotEnoughException;
 import cn.lger.exception.CommodityNumberNotEnoughException;
 import cn.lger.exception.IdNotFoundException;
 import cn.lger.service.CommodityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +24,7 @@ import javax.annotation.Resource;
 @Controller
 public class CommodityController {
 
-    @Resource
+    @Autowired
     private CommodityService commodityService;
 
     @GetMapping("/addCommodity")
